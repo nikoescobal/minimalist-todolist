@@ -1,10 +1,14 @@
 import './style.css';
 
-let arr = [];
-
 let tasksContainer = document.getElementById('tasks-container');
-tasksContainer.innerHTML = "hello";
+tasksContainer.innerHTML =
+  `
+<li>Do OnePunch Man workout</li>
+<li>Read a book</li>
+<li>Eat protein bar</li>
+`
 
+let taskItems = document.createElement('ul');
 
 // let tasks = {
 //   description: ,
