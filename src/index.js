@@ -4,7 +4,7 @@ import deleteIcon from "./delete.svg";
 import {
   addTask,
   deleteTask,
-  clearAllComplele,
+  clearAllDone,
   checkIfDone,
   updateDescription,
   refreshPage,
@@ -12,7 +12,7 @@ import {
 
 const taskWrapper = document.getElementById("task-wrapper");
 
-const taskInput = document.getElementById("todo-input");
+const taskInput = document.getElementById("tasks-input");
 
 taskInput.addEventListener("keyup", (e) => {
   if (e.key === "Enter") {
@@ -36,7 +36,7 @@ window.addEventListener("load", () => {
     trashIcon.setAttribute("width", "20");
     trashIcon.setAttribute("height", "20");
     checkBox.setAttribute("type", "checkbox");
-    checkBox.checked = task.isDone;
+    checkBox.checked = task.done;
     taskContent.value = task.description;
     taskContent.classList.add('task-input');
     taskItem.addEventListener("click", () => {
@@ -51,14 +51,14 @@ window.addEventListener("load", () => {
     trashIcon.addEventListener('click', () => {
       deleteTask(task.index);
     });
-    taskContent.style.textDecoration = task.isDone ? "line-through" : "none";
+    taskContent.style.textDecoration = task.done ? "line-through" : "none";
     checkBox.addEventListener("change", () => {
-      const isDone = checkIfDone(task.isDone);
-      task.isDone = isDone;
+      const done = checkIfDone(task.done);
+      task.done = done;
       localStorage.setItem("tasks", JSON.stringify(tasks));
       window.location.reload();
     });
-    taskContent.classList.add("p-todo-desc");
+    taskContent.classList.add("p-task-desc");
     contentWrapper.appendChild(checkBox);
     contentWrapper.appendChild(taskContent);
     taskItem.appendChild(contentWrapper);
@@ -66,3 +66,16 @@ window.addEventListener("load", () => {
     taskWrapper.append(taskItem);
   });
 });
+
+const taskItemBotom = document.createElement('li');
+taskItemBotom.classList.add(...['task-item', 'task-bottom']);
+const paragraphBottom = document.createElement('p');
+paragraphBottom.classList.add('p-bottom');
+paragraphBottom.innerHTML = 'Clear all finished tasks';
+taskItemBotom.appendChild(paragraphBottom);
+
+paragraphBottom.addEventListener('click', clearAllDone);
+
+setTimeout(() => {
+  taskWrapper.appendChild(taskItemBotom);
+}, 1000);

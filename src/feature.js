@@ -7,7 +7,7 @@ export const addTask = (description) => {
   const task = {
     description,
     index,
-    completed: false
+    done: false
   };
   tasks.push(task);
   localStorage.setItem('tasks', JSON.stringify(tasks));
@@ -28,8 +28,8 @@ export const deleteTask = (index) => {
   }
 };
 
-export const clearAllComplele = () => {
-  const remainingtasks = tasks.filter((task) => !task.completed);
+export const clearAllDone = () => {
+  const remainingtasks = tasks.filter((task) => !task.done);
   if (remainingtasks.length > 0) {
     remainingtasks.forEach((task, index) => {
       task.index = index + 1;
