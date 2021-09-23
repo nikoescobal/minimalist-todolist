@@ -20,7 +20,7 @@ body {
   margin-bottom: 2rem;
 }
 
-.todo-wrapper {
+.tasks-wrapper {
   list-style: none;
   width: 500px;
   background-color: #fff;
@@ -44,7 +44,7 @@ body {
   color: rgb(124, 124, 124);
 }
 
-.p-todo-desc {
+.p-task-desc {
   margin-left: 1.2rem;
 }
 
@@ -78,7 +78,7 @@ body {
   display: flex;
 }
 
-.item-bottom {
+.task-bottom {
   display: flex;
   align-items: center;
   justify-content: center;
