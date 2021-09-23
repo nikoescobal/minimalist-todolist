@@ -1,5 +1,5 @@
-import "./style.css";
-import deleteIcon from "./delete.svg";
+import './style.css';
+import deleteIcon from './delete.svg';
 
 import {
   addTask,
@@ -8,57 +8,58 @@ import {
   checkIfDone,
   updateDescription,
   refreshPage,
-} from "./feature.js";
+} from './feature.js';
 
-const taskWrapper = document.getElementById("task-wrapper");
+const taskWrapper = document.getElementById('task-wrapper');
 
-const taskInput = document.getElementById("tasks-input");
+const taskInput = document.getElementById('tasks-input');
 
-taskInput.addEventListener("keyup", (e) => {
-  if (e.key === "Enter") {
+document.getElementById('refresh').addEventListener('click', () => refreshPage());
+
+taskInput.addEventListener('keyup', (e) => {
+  if (e.key === 'Enter') {
     addTask(e.target.value);
   }
 });
 
-window.addEventListener("load", () => {
+window.addEventListener('load', () => {
   const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
 
   tasks.forEach((task) => {
-    const taskItem = document.createElement("li");
-    taskItem.classList.add("task-item");
-    const taskContent = document.createElement("input");
-    const checkBox = document.createElement("input");
-    const trashIcon = document.createElement("img");
-    const contentWrapper = document.createElement("div");
-    contentWrapper.classList.add("content-wrapper");
-    trashIcon.classList.add("custom-icon");
-    trashIcon.setAttribute("src", `${deleteIcon}`);
-    trashIcon.setAttribute("width", "20");
-    trashIcon.setAttribute("height", "20");
-    checkBox.setAttribute("type", "checkbox");
+    const taskItem = document.createElement('li');
+    taskItem.classList.add('task-item');
+    const taskContent = document.createElement('input');
+    const checkBox = document.createElement('input');
+    const trashIcon = document.createElement('img');
+    const contentWrapper = document.createElement('div');
+    contentWrapper.classList.add('content-wrapper');
+    trashIcon.classList.add('custom-icon');
+    trashIcon.setAttribute('src', `${deleteIcon}`);
+    trashIcon.setAttribute('width', '20');
+    trashIcon.setAttribute('height', '20');
+    checkBox.setAttribute('type', 'checkbox');
     checkBox.checked = task.done;
     taskContent.value = task.description;
     taskContent.classList.add('task-input');
-    taskItem.addEventListener("click", () => {
-      console.log("Hello");
+    taskItem.addEventListener('click', () => {
       taskContent.disabled = false;
     });
-    taskContent.addEventListener("keyup", (e) => {
-      if (e.key === "Enter") {
+    taskContent.addEventListener('keyup', (e) => {
+      if (e.key === 'Enter') {
         updateDescription(task.index, e.target.value);
       }
     });
     trashIcon.addEventListener('click', () => {
       deleteTask(task.index);
     });
-    taskContent.style.textDecoration = task.done ? "line-through" : "none";
-    checkBox.addEventListener("change", () => {
+    taskContent.style.textDecoration = task.done ? 'line-through' : 'none';
+    checkBox.addEventListener('change', () => {
       const done = checkIfDone(task.done);
       task.done = done;
-      localStorage.setItem("tasks", JSON.stringify(tasks));
+      localStorage.setItem('tasks', JSON.stringify(tasks));
       window.location.reload();
     });
-    taskContent.classList.add("p-task-desc");
+    taskContent.classList.add('p-task-desc');
     contentWrapper.appendChild(checkBox);
     contentWrapper.appendChild(taskContent);
     taskItem.appendChild(contentWrapper);

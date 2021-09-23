@@ -7,7 +7,7 @@ export const addTask = (description) => {
   const task = {
     description,
     index,
-    done: false
+    done: false,
   };
   tasks.push(task);
   localStorage.setItem('tasks', JSON.stringify(tasks));
