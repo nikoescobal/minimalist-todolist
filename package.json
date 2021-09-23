@@ -1,5 +1,5 @@
 {
-  "name": "minimalist-todolist",
+  "name": "minimalist-taskList",
   "version": "1.0.0",
   "description": "",
   "private": true,
@@ -10,15 +10,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nikoescobal/minimalist-todolist.git"
+    "url": "git+https://github.com/nikoescobal/minimalist-taskList.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/nikoescobal/minimalist-todolist/issues"
+    "url": "https://github.com/nikoescobal/minimalist-taskList/issues"
   },
-  "homepage": "https://github.com/nikoescobal/minimalist-todolist#readme",
+  "homepage": "https://github.com/nikoescobal/minimalist-taskList#readme",
   "devDependencies": {
     "babel-eslint": "^10.1.0",
     "clean-webpack-plugin": "^4.0.0",

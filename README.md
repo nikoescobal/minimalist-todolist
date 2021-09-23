@@ -18,7 +18,7 @@ In this project, I built a simple to-do list app and followed the specific desig
 
 ## Live Demo
 
-[Live Link](https://raw.githack.com/nikoescobal/minimalist-todolist/feature/dist/index.html)
+[Live Link](https://raw.githack.com/nikoescobal/minimalist-taskList/feature/dist/index.html)
 
 
 ## Getting Started

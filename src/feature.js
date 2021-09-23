@@ -1,51 +1,51 @@
 /* eslint-disable import/prefer-default-export */
 export const checkIfDone = (done) => !done;
 
-const todos = JSON.parse(localStorage.getItem('todos')) || [];
-export const addTodo = (description) => {
-  const index = todos && todos.length > 0 ? todos.length + 1 : 1;
-  const todo = {
+const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+export const addTask = (description) => {
+  const index = tasks && tasks.length > 0 ? tasks.length + 1 : 1;
+  const task = {
     description,
     index,
     completed: false
   };
-  todos.push(todo);
-  localStorage.setItem('todos', JSON.stringify(todos));
+  tasks.push(task);
+  localStorage.setItem('tasks', JSON.stringify(tasks));
   window.location.reload();
 };
 
-export const deleteTodo = (index) => {
-  const remainingTodos = todos.filter((todo) => todo.index !== index);
-  if (remainingTodos.length > 0) {
-    remainingTodos.forEach((todo, index) => {
-      todo.index = index + 1;
+export const deleteTask = (index) => {
+  const remainingtasks = tasks.filter((task) => task.index !== index);
+  if (remainingtasks.length > 0) {
+    remainingtasks.forEach((task, index) => {
+      task.index = index + 1;
     });
-    localStorage.setItem('todos', JSON.stringify(remainingTodos));
+    localStorage.setItem('tasks', JSON.stringify(remainingtasks));
     window.location.reload();
   } else {
-    localStorage.setItem('todos', JSON.stringify(remainingTodos));
+    localStorage.setItem('tasks', JSON.stringify(remainingtasks));
     window.location.reload();
   }
 };
 
 export const clearAllComplele = () => {
-  const remainingTodos = todos.filter((todo) => !todo.completed);
-  if (remainingTodos.length > 0) {
-    remainingTodos.forEach((todo, index) => {
-      todo.index = index + 1;
+  const remainingtasks = tasks.filter((task) => !task.completed);
+  if (remainingtasks.length > 0) {
+    remainingtasks.forEach((task, index) => {
+      task.index = index + 1;
     });
-    localStorage.setItem('todos', JSON.stringify(remainingTodos));
+    localStorage.setItem('tasks', JSON.stringify(remainingtasks));
     window.location.reload();
   } else {
-    localStorage.setItem('todos', JSON.stringify(remainingTodos));
+    localStorage.setItem('tasks', JSON.stringify(remainingtasks));
     window.location.reload();
   }
 };
 
 export const updateDescription = (index, description) => {
-  const todo = todos.filter((todo) => todo.index === index)[0];
-  todo.description = description;
-  localStorage.setItem('todos', JSON.stringify(todos));
+  const task = tasks.filter((task) => task.index === index)[0];
+  task.description = description;
+  localStorage.setItem('tasks', JSON.stringify(tasks));
   window.location.reload();
 };
 

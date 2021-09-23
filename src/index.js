@@ -1,8 +1,9 @@
 import "./style.css";
-import moreImage from "./more.svg";
+import deleteIcon from "./delete.svg";
+
 import {
-  addTodo,
-  deleteTodo,
+  addTask,
+  deleteTask,
   clearAllComplele,
   checkIfDone,
   updateDescription,
@@ -15,27 +16,28 @@ const taskInput = document.getElementById("todo-input");
 
 taskInput.addEventListener("keyup", (e) => {
   if (e.key === "Enter") {
-    addTodo(e.target.value);
+    addTask(e.target.value);
   }
 });
 
 window.addEventListener("load", () => {
-  const todoList = JSON.parse(localStorage.getItem("todos"));
-  todoList.forEach((todo) => {
+  const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+
+  tasks.forEach((task) => {
     const taskItem = document.createElement("li");
     taskItem.classList.add("task-item");
     const taskContent = document.createElement("input");
     const checkBox = document.createElement("input");
-    const ellipsisIcon = document.createElement("img");
+    const trashIcon = document.createElement("img");
     const contentWrapper = document.createElement("div");
     contentWrapper.classList.add("content-wrapper");
-    ellipsisIcon.classList.add("custom-icon");
-    ellipsisIcon.setAttribute("src", `${moreImage}`);
-    ellipsisIcon.setAttribute("width", "6");
-    ellipsisIcon.setAttribute("height", "10");
+    trashIcon.classList.add("custom-icon");
+    trashIcon.setAttribute("src", `${deleteIcon}`);
+    trashIcon.setAttribute("width", "20");
+    trashIcon.setAttribute("height", "20");
     checkBox.setAttribute("type", "checkbox");
-    checkBox.checked = todo.isDone;
-    taskContent.value = todo.description;
+    checkBox.checked = task.isDone;
+    taskContent.value = task.description;
     taskContent.classList.add('task-input');
     taskItem.addEventListener("click", () => {
       console.log("Hello");
@@ -43,21 +45,24 @@ window.addEventListener("load", () => {
     });
     taskContent.addEventListener("keyup", (e) => {
       if (e.key === "Enter") {
-        updateDescription(todo.index, e.target.value);
+        updateDescription(task.index, e.target.value);
       }
     });
-    taskContent.style.textDecoration = todo.isDone ? "line-through" : "none";
+    trashIcon.addEventListener('click', () => {
+      deleteTask(task.index);
+    });
+    taskContent.style.textDecoration = task.isDone ? "line-through" : "none";
     checkBox.addEventListener("change", () => {
-      const isDone = checkIfDone(todo.isDone);
-      todo.isDone = isDone;
-      localStorage.setItem("todos", JSON.stringify(todoList));
+      const isDone = checkIfDone(task.isDone);
+      task.isDone = isDone;
+      localStorage.setItem("tasks", JSON.stringify(tasks));
       window.location.reload();
     });
     taskContent.classList.add("p-todo-desc");
     contentWrapper.appendChild(checkBox);
     contentWrapper.appendChild(taskContent);
     taskItem.appendChild(contentWrapper);
-    taskItem.appendChild(ellipsisIcon);
+    taskItem.appendChild(trashIcon);
     taskWrapper.append(taskItem);
   });
 });
