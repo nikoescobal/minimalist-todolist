@@ -7,25 +7,25 @@ import {
 const taskWrapper = document.getElementById('task-wrapper');
 
 const todos = [{
-    description: 'Do OnePunch Man workout',
-    isDone: false,
-    index: 1,
-  },
-  {
-    description: 'Practice guitar',
-    isDone: false,
-    index: 2,
-  },
-  {
-    description: 'Walk the dog',
-    isDone: false,
-    index: 3,
-  },
-  {
-    description: 'Eat protein bar',
-    isDone: false,
-    index: 3,
-  },
+  description: 'Do OnePunch Man workout',
+  isDone: false,
+  index: 1,
+},
+{
+  description: 'Practice guitar',
+  isDone: false,
+  index: 2,
+},
+{
+  description: 'Walk the dog',
+  isDone: false,
+  index: 3,
+},
+{
+  description: 'Eat protein bar',
+  isDone: false,
+  index: 3,
+},
 ];
 
 window.addEventListener('load', () => {
