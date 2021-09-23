@@ -1,8 +1,8 @@
 import './style.css';
 import moreImage from './more.svg';
 import {
-  checkIfDone
-} from './feature';
+  checkIfDone,
+} from './feature.js';
 
 const taskWrapper = document.getElementById('task-wrapper');
 
@@ -29,12 +29,11 @@ const todos = [{
 ];
 
 window.addEventListener('load', () => {
-
   const todoList = JSON.parse(localStorage.getItem('todos'));
   if (todoList && todoList.length > 0) {
     todoList.forEach((todo) => {
       const taskItem = document.createElement('li');
-      taskItem.classList.add('list-item');
+      taskItem.classList.add('task-item');
       const taskContent = document.createElement('p');
       const checkBox = document.createElement('input');
       const ellipsisIcon = document.createElement('img');
@@ -65,7 +64,7 @@ window.addEventListener('load', () => {
   } else {
     todos.forEach((todo) => {
       const taskItem = document.createElement('li');
-      taskItem.classList.add('list-item');
+      taskItem.classList.add('task-item');
       const taskContent = document.createElement('p');
       const checkBox = document.createElement('input');
       const ellipsisIcon = document.createElement('img');
