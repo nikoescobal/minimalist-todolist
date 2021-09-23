@@ -1,7 +1,10 @@
 import './style.css';
 import moreImage from './more.svg';
+import {
+  checkIfDone,
+} from './feature.js';
 
-const listWrapper = document.getElementById('list-wrapper');
+const taskWrapper = document.getElementById('task-wrapper');
 
 const todos = [{
   description: 'Do OnePunch Man workout',
@@ -26,29 +29,66 @@ const todos = [{
 ];
 
 window.addEventListener('load', () => {
-  todos.forEach((todo) => {
-    const listItem = document.createElement('li');
-    listItem.classList.add('task-item');
-    const itemContent = document.createElement('input');
-    const checkBox = document.createElement('input');
-    const ellipsisIcon = document.createElement('img');
-    const contentWrapper = document.createElement('div');
-    contentWrapper.classList.add('ct-wrapper');
-    ellipsisIcon.classList.add('icon-cust');
-    ellipsisIcon.setAttribute('width', '20');
-    ellipsisIcon.setAttribute('height', '20');
-    checkBox.setAttribute('type', 'checkbox');
-    ellipsisIcon.setAttribute('src', `${moreImage}`);
-
-    itemContent.classList.add('task-input');
-    itemContent.disabled = true;
-
-    itemContent.classList.add('p-todo-desc');
-    itemContent.value = todo.description;
-    contentWrapper.appendChild(checkBox);
-    contentWrapper.appendChild(itemContent);
-    listItem.appendChild(contentWrapper);
-    listItem.appendChild(ellipsisIcon);
-    listWrapper.append(listItem);
-  });
+  const todoList = JSON.parse(localStorage.getItem('todos'));
+  if (todoList && todoList.length > 0) {
+    todoList.forEach((todo) => {
+      const taskItem = document.createElement('li');
+      taskItem.classList.add('task-item');
+      const taskContent = document.createElement('p');
+      const checkBox = document.createElement('input');
+      const ellipsisIcon = document.createElement('img');
+      const contentWrapper = document.createElement('div');
+      contentWrapper.classList.add('content-wrapper');
+      ellipsisIcon.classList.add('custom-icon');
+      ellipsisIcon.setAttribute('src', `${moreImage}`);
+      ellipsisIcon.setAttribute('width', '6');
+      ellipsisIcon.setAttribute('height', '10');
+      checkBox.setAttribute('type', 'checkbox');
+      checkBox.checked = todo.isDone;
+      taskContent.style.textDecoration = todo.isDone ? 'line-through' : 'none';
+      // checkBox.setAttribute('checked', ``);
+      checkBox.addEventListener('change', () => {
+        const isDone = checkIfDone(todo.isDone);
+        todo.isDone = isDone;
+        localStorage.setItem('todos', JSON.stringify(todoList));
+        window.location.reload();
+      });
+      taskContent.classList.add('p-todo-desc');
+      taskContent.innerHTML = todo.description;
+      contentWrapper.appendChild(checkBox);
+      contentWrapper.appendChild(taskContent);
+      taskItem.appendChild(contentWrapper);
+      taskItem.appendChild(ellipsisIcon);
+      taskWrapper.append(taskItem);
+    });
+  } else {
+    todos.forEach((todo) => {
+      const taskItem = document.createElement('li');
+      taskItem.classList.add('task-item');
+      const taskContent = document.createElement('p');
+      const checkBox = document.createElement('input');
+      const ellipsisIcon = document.createElement('img');
+      const contentWrapper = document.createElement('div');
+      contentWrapper.classList.add('content-wrapper');
+      ellipsisIcon.classList.add('custom-icon');
+      ellipsisIcon.setAttribute('src', `${moreImage}`);
+      ellipsisIcon.setAttribute('width', '6');
+      ellipsisIcon.setAttribute('height', '10');
+      checkBox.setAttribute('type', 'checkbox');
+      checkBox.checked = todo.isDone;
+      checkBox.addEventListener('change', () => {
+        const isDone = checkIfDone(todo.isDone);
+        todo.isDone = isDone;
+        localStorage.setItem('todos', JSON.stringify(todos));
+        window.location.reload();
+      });
+      taskContent.classList.add('p-todo-desc');
+      taskContent.innerHTML = todo.description;
+      contentWrapper.appendChild(checkBox);
+      contentWrapper.appendChild(taskContent);
+      taskItem.appendChild(contentWrapper);
+      taskItem.appendChild(ellipsisIcon);
+      taskWrapper.append(taskItem);
+    });
+  }
 });

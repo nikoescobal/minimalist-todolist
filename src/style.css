@@ -66,15 +66,15 @@ body {
   outline: none;
 }
 
-.icon-cust {
+.custom-icon {
   color: rgb(194, 194, 194);
 }
 
-.icon-cust:hover {
+.custom-icon:hover {
   cursor: pointer;
 }
 
-.ct-wrapper {
+.content-wrapper {
   display: flex;
 }
 
