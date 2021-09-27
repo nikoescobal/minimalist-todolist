@@ -20,7 +20,7 @@
   "bugs": {
     "url": "https://github.com/nikoescobal/minimalist-taskList/issues"
   },
-  "homepage": "https://github.com/nikoescobal/minimalist-taskList#readme",
+  "homepage": "https://github.com/nikoescobal/minimalist-taskList",
   "devDependencies": {
     "babel-eslint": "^10.1.0",
     "clean-webpack-plugin": "^4.0.0",
