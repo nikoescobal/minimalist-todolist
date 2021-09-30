@@ -8,6 +8,7 @@ import {
   checkIfDone,
   updateDescription,
   refreshPage,
+  setStorageAndReloadPage
 } from './feature.js';
 
 const taskWrapper = document.getElementById('task-wrapper');
@@ -56,8 +57,7 @@ window.addEventListener('load', () => {
     checkBox.addEventListener('change', () => {
       const done = checkIfDone(task.done);
       task.done = done;
-      localStorage.setItem('tasks', JSON.stringify(tasks));
-      window.location.reload();
+      setStorageAndReloadPage(tasks);
     });
     taskContent.classList.add('p-task-desc');
     contentWrapper.appendChild(checkBox);
@@ -66,17 +66,13 @@ window.addEventListener('load', () => {
     taskItem.appendChild(trashIcon);
     taskWrapper.append(taskItem);
   });
-});
+  const taskItemBotom = document.createElement('li');
+  taskItemBotom.classList.add(...['task-item', 'task-bottom']);
+  const paragraphBottom = document.createElement('p');
+  paragraphBottom.classList.add('p-bottom');
+  paragraphBottom.innerHTML = 'Clear all finished tasks';
+  taskItemBotom.appendChild(paragraphBottom);
 
-const taskItemBotom = document.createElement('li');
-taskItemBotom.classList.add(...['task-item', 'task-bottom']);
-const paragraphBottom = document.createElement('p');
-paragraphBottom.classList.add('p-bottom');
-paragraphBottom.innerHTML = 'Clear all finished tasks';
-taskItemBotom.appendChild(paragraphBottom);
-
-paragraphBottom.addEventListener('click', clearAllDone);
-
-setTimeout(() => {
+  paragraphBottom.addEventListener('click', clearAllDone);
   taskWrapper.appendChild(taskItemBotom);
-}, 1000);
+});
